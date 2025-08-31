@@ -75,6 +75,6 @@ Prasyarat:
 
 ### Clone & bootstrap
 ```bash
-git clone https://github.com/your-org/hris.git
+git clone https://github.com/JustALearner101/hris-client.git
 cd hris
 pnpm install
