@@ -1,24 +1,27 @@
+import type React from "react"
+import type { Metadata } from "next"
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
+import { Analytics } from "@vercel/analytics/next"
+import { Suspense } from "react"
 import "./globals.css"
-import React from "react"
-import Sidebar from "@/components/sidebar/Sidebar"
 
-export const metadata = {
-  title: "HRIS",
-  description: "HRIS Dashboard and Modules",
+export const metadata: Metadata = {
+    title: "AnglerFish",
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
-        <div className="flex min-h-dvh">
-          <Sidebar />
-          <div className="flex-1 overflow-y-auto">
-            {children}
-              s
-          </div>
-        </div>
-      </body>
-    </html>
-  )
+export default function RootLayout({
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode
+}>) {
+    return (
+        <html lang="en" suppressHydrationWarning>
+        <head>{/* removed automatic dark-mode theme script */}</head>
+        <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+        <Suspense fallback={null}>{children}</Suspense>
+        <Analytics />
+        </body>
+        </html>
+    )
 }
