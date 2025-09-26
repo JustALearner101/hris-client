@@ -120,8 +120,8 @@ export function AppSidebar() {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild isActive={isActive("/dashboard")}>
-                                    <Link href="/dashboard">
+                                <SidebarMenuButton asChild isActive={isActive("/dashboard/dashboard-admin")}>
+                                    <Link href="/dashboard/dashboard-admin" className="flex items-center gap-2">
                                         <LayoutGrid />
                                         <span>Dashboard</span>
                                     </Link>
@@ -147,8 +147,8 @@ export function AppSidebar() {
                             <SidebarGroupContent>
                                 <SidebarMenu>
                                     <SidebarMenuItem>
-                                        <SidebarMenuButton asChild isActive={isActive("/employees")}>
-                                            <Link href="/employees">
+                                        <SidebarMenuButton asChild isActive={isActive("/master-employee")}>
+                                            <Link href="/people/master-employee">
                                                 <Users className="mr-2 size-4" />
                                                 <span>Master Employee</span>
                                             </Link>
@@ -156,8 +156,8 @@ export function AppSidebar() {
                                     </SidebarMenuItem>
 
                                     <SidebarMenuItem>
-                                        <SidebarMenuButton asChild isActive={isActive("/documents")}>
-                                            <Link href="/documents">
+                                        <SidebarMenuButton asChild isActive={isActive("/master-document")}>
+                                            <Link href="/people/master-document">
                                                 <FileText className="mr-2 size-4" />
                                                 <span>Master Document</span>
                                             </Link>
@@ -165,8 +165,8 @@ export function AppSidebar() {
                                     </SidebarMenuItem>
 
                                     <SidebarMenuItem>
-                                        <SidebarMenuButton asChild isActive={isActive("/onboarding")}>
-                                            <Link href="/onboarding">
+                                        <SidebarMenuButton asChild isActive={isActive("/onboarding-offboarding")}>
+                                            <Link href="/people/onboarding-offboarding">
                                                 <UserPlus className="mr-2 size-4" />
                                                 <span>Onboarding / Offboarding</span>
                                             </Link>

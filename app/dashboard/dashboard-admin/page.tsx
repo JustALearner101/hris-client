@@ -1,4 +1,4 @@
-// app/dashboard/page.tsx
+// app/dashboard/master-employee.ts
 import DashboardPage from './dashboard'
 
 export default function Page() {

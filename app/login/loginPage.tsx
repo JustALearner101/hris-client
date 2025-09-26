@@ -36,7 +36,7 @@ const LoginPage: React.FC = () => {
         {/* Left Side - Branding */}
         <div className="lg:w-1/2 bg-gradient-to-br from-slate-800 to-slate-900 p-8 lg:p-16 flex flex-col justify-between text-white">
           <div>
-            <div className="flex items-center space-x-3 mb-8">
+            <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center">
                   <img src="/assets/bg.png" alt="Logo" className="w-10 h-10" />
               </div>
@@ -61,7 +61,7 @@ const LoginPage: React.FC = () => {
                     <Users className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Employee Management</h3>
+                    <h3 className="font-semibold">Employee Management</h3>
                     <p className="text-slate-300 text-sm">Complete employee lifecycle management with self-service capabilities</p>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ const LoginPage: React.FC = () => {
                     <BarChart3 className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Advanced Analytics</h3>
+                    <h3 className="font-semibold">Advanced Analytics</h3>
                     <p className="text-slate-300 text-sm">Real-time insights and reporting for data-driven HR decisions</p>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ const LoginPage: React.FC = () => {
                     <Shield className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Compliance &amp; Security</h3>
+                    <h3 className="font-semibold">Compliance &amp; Security</h3>
                     <p className="text-slate-300 text-sm">Indonesian tax compliance with enterprise-grade security</p>
                   </div>
                 </div>
