@@ -14,6 +14,11 @@ import {
 import { Bell, Search } from "lucide-react"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 
+// Logout Function
+const logout = async () => {
+    window.location.href = "/login"
+}
+
 export function Topbar() {
     return (
         <header
@@ -65,7 +70,11 @@ export function Topbar() {
                             <DropdownMenuItem>Preferences</DropdownMenuItem>
                             <DropdownMenuItem>Billing</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Sign out</DropdownMenuItem>
+                            <DropdownMenuItem>Sign out
+                                {/*<button onClick={logout} className="ml-auto text-red-600 focus:text-red-600">*/}
+                                {/*    Logout*/}
+                                {/*</button>*/}
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>
