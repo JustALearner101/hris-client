@@ -7,8 +7,7 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
-import { DocumentTable } from "@/components/documents/document-table"
-import EmployeeTableCard from "@/components/employess/employee-table";
+import { DocumentTable } from "@/components/people-component/documents/document-table"
 
 export default function MasterDocumentPage() {
     return (

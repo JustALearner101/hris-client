@@ -38,6 +38,8 @@ import {
     Shield,        // Security / Audit Logs
     Settings,      // System Settings
     FileBarChart,
+    Megaphone,      // Announcements
+    Cog,            // Settings
 } from "lucide-react";
 
 
@@ -160,6 +162,25 @@ export function AppSidebar() {
                                             <Link href="/people/master-document">
                                                 <FileText className="mr-2 size-4" />
                                                 <span>Master Document</span>
+                                            </Link>
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>
+
+                                    <SidebarMenuItem>
+                                        <SidebarMenuButton asChild isActive={isActive("/master-announcement")}>
+                                            <Link href="/people/master-announcement">
+                                                <Megaphone className="mr-2 size-4" />
+                                                <span>Master Announcement</span>
+                                            </Link>
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>
+
+
+                                    <SidebarMenuItem>
+                                        <SidebarMenuButton asChild isActive={isActive("/master-setting")}>
+                                            <Link href="/people/master-setting">
+                                                <Cog className="mr-2 size-4" />
+                                                <span>Master Setting</span>
                                             </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>

@@ -1,6 +1,6 @@
-import { KpiCard } from "@/components/kpi-card/kpi-card"
+import { KpiCard } from "@/components/dashboard-component/kpi-card/kpi-card"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import {RevenueAreaChart} from "@/components/revenue-area-chart/revenue-area-chart";
+import {RevenueAreaChart} from "@/components/dashboard-component/revenue-area-chart/revenue-area-chart";
 
 export default function DashboardPage() {
     return (

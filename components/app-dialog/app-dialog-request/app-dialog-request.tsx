@@ -74,13 +74,13 @@ export function AppDialogRequest({
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-[220px]">
-                        <DropdownMenuItem onClick={() => setSelected("Cuti")}>
-                            Cuti
+                        <DropdownMenuItem onClick={() => setSelected("Cuti/Izin")}>
+                            Cuti/Izin
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => setSelected("Reimbursement")}>
                             Reimbursement
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setSelected("Klaim Lainnya")}>
+                        <DropdownMenuItem onClick={() => setSelected("Lainnya")}>
                             Klaim Lainnya
                         </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -89,13 +89,13 @@ export function AppDialogRequest({
                 {/* Sub form tergantung jenis pengajuan */}
                 {selected && (
                     <div className="space-y-4 mt-4">
-                        {selected === "Cuti" && (
+                        {selected === "Cuti/Izin" && (
                             <>
                                 <div>
-                                    <Label className="mb-2" htmlFor="reason">Alasan Cuti</Label>
+                                    <Label className="mb-2" htmlFor="reason">Alasan Cuti/Izin</Label>
                                     <Textarea
                                         id="reason"
-                                        placeholder="Tuliskan alasan cuti..."
+                                        placeholder="Tuliskan alasan cuti/izin..."
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                     />
@@ -137,13 +137,13 @@ export function AppDialogRequest({
                             </>
                         )}
 
-                        {selected === "Klaim Lainnya" && (
+                        {selected === "Lainnya" && (
                             <>
                                 <div>
                                     <Label className="mb-2" htmlFor="detail">Keterangan</Label>
                                     <Textarea
                                         id="detail"
-                                        placeholder="Tuliskan detail klaim..."
+                                        placeholder="Tuliskan keterangan..."
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                     />

@@ -7,9 +7,9 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { ProcessTable } from "@/components/onboarding/process-table"
+import { ProcessTable } from "@/components/people-component/onboarding/process-table"
 import {Separator} from "@/components/ui/separator";
-import EmployeeTableCard from "@/components/employess/employee-table";
+import EmployeeTableCard from "@/components/people-component/employess/employee-table";
 
 export default function OnboardingOffboardingPage() {
     return (

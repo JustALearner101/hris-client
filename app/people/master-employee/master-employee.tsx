@@ -1,4 +1,3 @@
-import EmployeeTableCard from "@/components/employess/employee-table"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -8,6 +7,7 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import {Separator} from "@/components/ui/separator";
+import EmployeeTableCard from "@/components/people-component/employess/employee-table";
 
 export default function MasterEmployeePage() {
     return (

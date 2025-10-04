@@ -119,7 +119,7 @@ export default function EmployeeTableCard() {
                                         <TableCell>
                                             <button
                                                 type="button"
-                                                className="text-foreground hover:text-primary hover:underline"
+                                                className="text hover:underline hover:text-primary transition-colors"
                                                 onClick={() => {
                                                     setViewData(e)
                                                     setOpenView(true)

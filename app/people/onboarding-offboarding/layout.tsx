@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import { AppSidebar } from "@/components/app-sidebar-admin/app-sidebar"
+import { AppSidebar } from "@/components/app-sidebar/app-sidebar-admin/app-sidebar"
 import { Topbar } from "@/components/topbar/topbar"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 

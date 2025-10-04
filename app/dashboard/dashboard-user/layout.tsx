@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import { EmployeeSidebar } from "@/components/app-sidebar-user/app-sidebar"
+import { EmployeeSidebar } from "@/components/app-sidebar/app-sidebar-user/app-sidebar"
 import { Topbar } from "@/components/topbar/topbar"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { Toaster } from "sonner"
