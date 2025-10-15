@@ -40,6 +40,7 @@ import {
     FileBarChart,
     Megaphone,      // Announcements
     Cog,            // Settings
+    Building, Clock,       // Master Department
 } from "lucide-react";
 
 
@@ -176,11 +177,20 @@ export function AppSidebar() {
                                     </SidebarMenuItem>
 
 
+                                    {/*<SidebarMenuItem>*/}
+                                    {/*    <SidebarMenuButton asChild isActive={isActive("/master-setting")}>*/}
+                                    {/*        <Link href="/people/master-setting">*/}
+                                    {/*            <Cog className="mr-2 size-4" />*/}
+                                    {/*            <span>Master Setting</span>*/}
+                                    {/*        </Link>*/}
+                                    {/*    </SidebarMenuButton>*/}
+                                    {/*</SidebarMenuItem>*/}
+
                                     <SidebarMenuItem>
-                                        <SidebarMenuButton asChild isActive={isActive("/master-setting")}>
-                                            <Link href="/people/master-setting">
-                                                <Cog className="mr-2 size-4" />
-                                                <span>Master Setting</span>
+                                        <SidebarMenuButton asChild isActive={isActive("/master-department")}>
+                                            <Link href="/people/master-department">
+                                                <Building className="mr-2 size-4" />
+                                                <span>Master Department</span>
                                             </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
@@ -215,10 +225,19 @@ export function AppSidebar() {
                             <SidebarGroupContent>
                                 <SidebarMenu>
                                     <SidebarMenuItem>
-                                        <SidebarMenuButton asChild isActive={isActive("/attendance")}>
-                                            <Link href="/attendance">
+                                        <SidebarMenuButton asChild isActive={isActive("/attendance/master-attendance-monitoring")}>
+                                            <Link href="/attendance/master-attendance-monitoring">
                                                 <CalendarDays className="mr-2 size-4" />
                                                 <span>Attendance Monitoring</span>
+                                            </Link>
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>
+
+                                    <SidebarMenuItem>
+                                        <SidebarMenuButton asChild isActive={isActive("/attendance/master-shift")}>
+                                            <Link href="/attendance/master-shift">
+                                                <Clock className="mr-2 size-4" />
+                                                <span>Shift Management</span>
                                             </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
