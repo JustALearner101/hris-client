@@ -1,0 +1,144 @@
+# docker-compose untuk HRIS (frontend + service pendukung)
+# Komentar dalam Bahasa Indonesia
+#
+# Catatan penting:
+# - File ini menyertakan layanan pendukung (api, db, redis, keycloak) sesuai topologi dev.
+# - Ganti image/konfigurasi "api" dengan milik Anda (NestJS backend) atau arahkan ke registry CI.
+# - Jangan letakkan rahasia di sini; gunakan .env (yang tidak di-commit) atau secrets manager.
+# - Gunakan profil (profiles) untuk memilih mode: dev atau prod.
+
+version: "3.9"
+name: hris
+
+networks:
+  hris:
+    driver: bridge
+
+volumes:
+  db_data:
+  pnpm-store:
+  # keycloak_data: # aktifkan bila ingin persist data keycloak dev
+
+services:
+  # ========================================
+  # Frontend (Next.js) - mode produksi
+  # Jalankan dengan profil "prod":
+  #   docker compose --profile prod up --build web
+  # ========================================
+  web:
+    build:
+      context: .
+      target: runner  # gunakan stage produksi dari Dockerfile
+    image: hris-client:prod
+    ports:
+      - "3000:3000"  # akses di http://localhost:3000
+    environment:
+      # ENV default bisa dioverride via .env atau CLI
+      NODE_ENV: production
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-https://api.hris.local/api/v1}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+    depends_on:
+      - api
+    networks:
+      - hris
+    profiles: ["prod"]
+
+  # ========================================
+  # Frontend (Next.js) - mode development (hot reload)
+  # Jalankan dengan profil "dev":
+  #   docker compose --profile dev up --build web-dev
+  # Untuk HMR, bind mount source code host ke container.
+  # ========================================
+  web-dev:
+    build:
+      context: .
+      target: dev  # gunakan stage dev dari Dockerfile
+    image: hris-client:dev
+    command: pnpm dev -- -p 3000 --turbo
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8080/api/v1}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+    volumes:
+      - .:/app  # perhatikan: di Windows WSL/FS lebih stabil untuk volume
+      - pnpm-store:/root/.local/share/pnpm  # cache store pnpm agar cepat
+    depends_on:
+      - api
+      - db
+      - redis
+      - keycloak
+    networks:
+      - hris
+    profiles: ["dev"]
+
+  # ========================================
+  # Backend API (NestJS) - placeholder
+  # Ganti image ini dengan image backend Anda, atau ubah menjadi build context repo backend.
+  # ========================================
+  api:
+    image: ghcr.io/your-org/hris-api:latest  # TODO: ganti sesuai registry Anda
+    # build:
+    #   context: ../hris-api  # contoh jika mau build dari repo lokal
+    #   dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+      # DATABASE_URL: 
+      # REDIS_URL: 
+      # KEYCLOAK_*: 
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - redis
+      - keycloak
+    networks:
+      - hris
+    profiles: ["dev", "prod"]
+
+  # ========================================
+  # Database (PostgreSQL 16)
+  # ========================================
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: hris
+      POSTGRES_PASSWORD: hris
+      POSTGRES_DB: hris
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - hris
+    profiles: ["dev", "prod"]
+
+  # ========================================
+  # Redis (opsional untuk cache/session)
+  # ========================================
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - hris
+    profiles: ["dev", "prod"]
+
+  # ========================================
+  # Keycloak (SSO) - mode development sederhana
+  # PERINGATAN: kredensial default hanya untuk lokal
+  # ========================================
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    command: start-dev --http-port=8081
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    # volumes:
+    #   - keycloak_data:/opt/keycloak/data
+    ports:
+      - "8081:8081"
+    networks:
+      - hris
+    profiles: ["dev", "prod"]
