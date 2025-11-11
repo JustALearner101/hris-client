@@ -7,6 +7,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import {Separator} from "@/components/ui/separator";
 
 export default function MasterDepartmentPage() {
     return (
@@ -26,6 +27,8 @@ export default function MasterDepartmentPage() {
                 <h1 className="text-2xl font-semibold tracking-tight text-balance">Master Department</h1>
                 <p className="text-muted-foreground">Manage organizational departments, heads, and hierarchy.</p>
             </div>
+
+            <Separator className="my-6" />
 
             <DepartmentTable />
         </main>

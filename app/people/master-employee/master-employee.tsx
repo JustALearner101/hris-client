@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { getAll as getAllEmployees } from "@/app/api/employees/data";
 import EmployeeTableCard from "@/components/people-component/employess/employee-table";
+import {Separator} from "@/components/ui/separator";
 
 export default function MasterEmployeePage() {
     const employees = getAllEmployees()
@@ -30,6 +31,8 @@ export default function MasterEmployeePage() {
                     <h1 className="text-2xl font-semibold tracking-tight text-pretty">Master Employee</h1>
                     <p className="text-sm text-muted-foreground">Manage all employees: create, view, edit, and delete.</p>
                 </header>
+
+                <Separator className="my-6" />
 
                 {/* Table card */}
                 <EmployeeTableCard />

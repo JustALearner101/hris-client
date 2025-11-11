@@ -42,9 +42,9 @@ export function AnnouncementViewDrawer({
             <DialogContent className="max-w-[75vw] max-h-[80vh] overflow-y-auto overflow-x-hidden p-0">
                 <div className="p-6">
                     <DialogHeader className="space-y-3">
-                        <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-start gap-2">
+                            {announcement.isPinned && <Pin className="h-7 w-4 text-primary flex-shrink-0" />}
                             <DialogTitle className="text-xl text-balance pr-8">{announcement.title}</DialogTitle>
-                            {announcement.isPinned && <Pin className="h-4 w-4 text-primary flex-shrink-0" />}
                         </div>
                         <div className="flex flex-wrap gap-2">
                             <Badge variant={priorityColor[announcement.priority]}>{announcement.priority}</Badge>
