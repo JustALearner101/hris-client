@@ -9,8 +9,14 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
-import { X } from "lucide-react"
+import { X, ChevronDownIcon } from "lucide-react"
+import { Calendar } from "@/components/ui/calendar";
 import type { Announcement, AnnouncementCategory, AnnouncementPriority, DeliveryChannel } from "@/types/announcement"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 
 interface AnnouncementFormDialogProps {
     open: boolean
@@ -43,13 +49,43 @@ export function AnnouncementFormDialog({ open, onOpenChange, onSubmit, initial, 
     const [selectedDepartments, setSelectedDepartments] = React.useState<string[]>(initial?.audience?.departments || [])
     const [departmentInput, setDepartmentInput] = React.useState("")
 
+    // Date state for shadcn Calendar (fixes TS2552 / TS2304)
+    const [date, setDate] = React.useState<Date | undefined>(() =>
+        initial?.scheduledAt ? new Date(initial.scheduledAt) : undefined
+    )
+    const [popoverOpen, setPopoverOpen] = React.useState(false)
+
     React.useEffect(() => {
         if (open && initial) {
             setFormData({ ...formData, ...initial })
             setSelectedChannels(initial.channels || ["web"])
             setSelectedDepartments(initial.audience?.departments || [])
+            setDate(initial.scheduledAt ? new Date(initial.scheduledAt) : undefined)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open, initial])
+
+    // Sync Calendar -> formData.scheduledAt
+    React.useEffect(() => {
+        const iso = date ? date.toISOString() : undefined
+        if (formData.scheduledAt !== iso) {
+            setFormData((prev) => ({ ...prev, scheduledAt: iso }))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [date])
+
+    // Sync formData.scheduledAt -> Calendar (keeps typing in input and calendar selection consistent)
+    React.useEffect(() => {
+        if (formData.scheduledAt) {
+            const d = new Date(formData.scheduledAt)
+            if (!isNaN(d.getTime()) && (!date || d.getTime() !== date.getTime())) {
+                setDate(d)
+            }
+        } else if (date) {
+            setDate(undefined)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [formData.scheduledAt])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -78,6 +114,7 @@ export function AnnouncementFormDialog({ open, onOpenChange, onSubmit, initial, 
         })
         setSelectedChannels(["web"])
         setSelectedDepartments([])
+        setDate(undefined)
     }
 
     const toggleChannel = (channel: DeliveryChannel) => {
@@ -267,6 +304,32 @@ export function AnnouncementFormDialog({ open, onOpenChange, onSubmit, initial, 
                                     })
                                 }
                             />
+                            {/*<Label htmlFor="date" className="px-1">*/}
+                            {/*    Date of birth*/}
+                            {/*</Label>*/}
+                            {/*<Popover open={popoverOpen} onOpenChange={setPopoverOpen}>*/}
+                            {/*    <PopoverTrigger asChild>*/}
+                            {/*        <Button*/}
+                            {/*            variant="outline"*/}
+                            {/*            id="date"*/}
+                            {/*            className="w-48 justify-between font-normal"*/}
+                            {/*        >*/}
+                            {/*            {date ? date.toLocaleDateString() : "Select date"}*/}
+                            {/*            <ChevronDownIcon />*/}
+                            {/*        </Button>*/}
+                            {/*    </PopoverTrigger>*/}
+                            {/*    <PopoverContent className="w-auto overflow-hidden p-0" align="start">*/}
+                            {/*        <Calendar*/}
+                            {/*            mode="single"*/}
+                            {/*            selected={date}*/}
+                            {/*            captionLayout="dropdown"*/}
+                            {/*            onSelect={(date) => {*/}
+                            {/*                setDate(date)*/}
+                            {/*                setPopoverOpen(false)*/}
+                            {/*            }}*/}
+                            {/*        />*/}
+                            {/*    </PopoverContent>*/}
+                            {/*</Popover>*/}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="expiresAt">Expiry Date (optional)</Label>

@@ -242,14 +242,15 @@ export function AppSidebar() {
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
 
-                                    <SidebarMenuItem>
-                                        <SidebarMenuButton asChild isActive={isActive("/leave")}>
-                                            <Link href="/leave">
-                                                <FileCheck className="mr-2 size-4" />
-                                                <span>Leave Management</span>
-                                            </Link>
-                                        </SidebarMenuButton>
-                                    </SidebarMenuItem>
+                                    {/*<SidebarMenuItem>*/}
+
+                                    {/*    <SidebarMenuButton asChild isActive={isActive("/leave")}>*/}
+                                    {/*        <Link href="/leave">*/}
+                                    {/*            <FileCheck className="mr-2 size-4" />*/}
+                                    {/*            <span>Leave Management</span>*/}
+                                    {/*        </Link>*/}
+                                    {/*    </SidebarMenuButton>*/}
+                                    {/*</SidebarMenuItem>*/}
                                 </SidebarMenu>
                             </SidebarGroupContent>
                         </CollapsibleContent>
