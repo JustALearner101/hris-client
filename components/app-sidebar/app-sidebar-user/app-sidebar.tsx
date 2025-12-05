@@ -50,7 +50,7 @@ export function EmployeeSidebar() {
                     <SidebarMenu>
                         <SidebarMenuItem>
                             <SidebarMenuButton asChild isActive={pathname === "/dashboard"}>
-                                <Link href="/dashboard" className="flex items-center gap-2">
+                                <Link href="/modules/dashboard" className="flex items-center gap-2">
                                     {/* Logo besar ketika expanded */}
                                     <img
                                         src="/assets/bg.png"
@@ -86,7 +86,7 @@ export function EmployeeSidebar() {
                             <SidebarMenu>
                                 <SidebarMenuItem>
                                     <SidebarMenuButton asChild isActive={isActive("/dashboard")}>
-                                        <Link href="/dashboard">
+                                        <Link href="/modules/dashboard">
                                             <LayoutGrid className="mr-2 size-4" />
                                             <span>Dashboard</span>
                                         </Link>
@@ -135,7 +135,7 @@ export function EmployeeSidebar() {
                                     <SidebarMenu>
                                         <SidebarMenuItem>
                                             <SidebarMenuButton asChild isActive={isActive("/attendance")}>
-                                                <Link href="/attendance">
+                                                <Link href="/modules/attendance">
                                                     <CalendarDays className="mr-2 size-4" />
                                                     <span>Attendance</span>
                                                 </Link>
