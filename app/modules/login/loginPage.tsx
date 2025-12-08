@@ -101,7 +101,7 @@ const LoginPage: React.FC = () => {
         <div className="lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
           <div className="w-full max-w-md">
             <Card className="shadow-2xl border-0">
-              <CardHeader className="text-center pb-6">
+              <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-bold text-gray-900">
                   Welcome
                 </CardTitle>
@@ -172,7 +172,7 @@ const LoginPage: React.FC = () => {
                   </Button>
                 </form>
 
-                <div className="mt-8 pt-6 border-t border-gray-200 text-center">
+                <div className="pt-4 border-t border-gray-200 text-center">
                   <p className="text-sm text-gray-600">
                     Demo credentials are pre-filled. Just click Sign In.
                   </p>
