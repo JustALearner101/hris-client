@@ -16,7 +16,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         return NextResponse.json(updated)
     } catch (e: unknown) {
         const message = e instanceof Error ? e.message : "Failed to update"
-        return NextResponse.json({ error: message }, { status: 400 })    }
+        return NextResponse.json({ error: message }, { status: 400 })
+    }
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
