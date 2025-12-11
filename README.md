@@ -100,4 +100,4 @@ The current UI does not require mandatory environment variables for basic local 
 
 ## License
 
-This project is proprietary/internal. If you plan to open‑source it, add a proper LICENSE file and update this section.
+This project is open source
