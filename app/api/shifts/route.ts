@@ -1,13 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { listShifts, createShift } from "./data"
-import type { Shift, ShiftFilters } from "@/types/shift"
+import type { Shift, ShiftFilters, ShiftType } from "@/types/shift"
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url)
     const filters: ShiftFilters = {
         search: searchParams.get("search") ?? undefined,
-        type: (searchParams.get("type") as any) ?? "ALL",
-        active: (searchParams.get("active") as any) ?? "all",
+        type: (searchParams.get("type") as ShiftType | "ALL") ?? "ALL",
+        active: (searchParams.get("active") as ShiftFilters["active"]) ?? "all",
         page: Number(searchParams.get("page") ?? "1"),
         pageSize: Number(searchParams.get("pageSize") ?? "10"),
     }
@@ -40,13 +40,10 @@ export async function POST(req: NextRequest) {
             active: body.active ?? true,
             createdBy: body.createdBy,
             updatedBy: body.updatedBy,
-            version: 1, // ignored by create
-            createdAt: "", // ignored by create
-            updatedAt: "", // ignored by create
-            id: "", // ignored by create
-        } as any)
+        })
         return NextResponse.json(created, { status: 201 })
-    } catch (e: any) {
-        return NextResponse.json({ error: e.message ?? "Failed to create" }, { status: 400 })
+    } catch (e: unknown) {
+        const message = e instanceof Error ? e.message : "Failed to create"
+        return NextResponse.json({ error: message }, { status: 400 })
     }
 }

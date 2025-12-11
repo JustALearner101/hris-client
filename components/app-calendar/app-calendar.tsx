@@ -27,10 +27,21 @@ export default function Calendar() {
 
     const monthName = currentMonth.toLocaleString("default", { month: "long", year: "numeric" })
 
-    const getEventsForDate = (day: number) => {
+    // Memoize events lookup by creating a Map for O(1) access
+    const eventsByDate = React.useMemo(() => {
+        const map = new Map<string, typeof events>()
+        for (const event of events) {
+            const existing = map.get(event.date) ?? []
+            existing.push(event)
+            map.set(event.date, existing)
+        }
+        return map
+    }, [])
+
+    const getEventsForDate = React.useCallback((day: number) => {
         const dateStr = `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`
-        return events.filter((e) => e.date === dateStr)
-    }
+        return eventsByDate.get(dateStr) ?? []
+    }, [currentMonth, eventsByDate])
 
     return (
         <Card className="shadow-sm">

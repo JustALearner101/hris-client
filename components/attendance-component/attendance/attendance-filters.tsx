@@ -114,7 +114,7 @@ export function AttendanceFilters({
                             </div>
                             <div className="grid gap-2">
                                 <p className="text-sm font-medium">Status</p>
-                                <Select value={value.status || "all"} onValueChange={(v: any) => onChange({ ...value, status: v })}>
+                                <Select value={value.status || "all"} onValueChange={(v) => onChange({ ...value, status: v as AttendanceFilterState["status"] })}>
                                     <SelectTrigger>
                                         <SelectValue />
                                     </SelectTrigger>

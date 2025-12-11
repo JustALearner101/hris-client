@@ -2,14 +2,14 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { Building2, ArrowRight, Shield, Users, BarChart3 } from 'lucide-react'
+import { ArrowRight, Shield, Users, BarChart3 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from "@/components/ui/checkbox"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Separator } from "@/components/ui/separator"
 
 const LoginPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -39,7 +39,7 @@ const LoginPage: React.FC = () => {
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                  <img src="/assets/bg.png" alt="Logo" className="w-10 h-10" />
+                  <Image src="/assets/bg.png" alt="Logo" width={40} height={40} />
               </div>
               <div>
                 <h1 className="text-2xl font-bold">AnglerFish</h1>

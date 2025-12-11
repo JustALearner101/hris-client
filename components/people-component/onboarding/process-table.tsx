@@ -13,7 +13,6 @@ import { MoreHorizontal, Search } from "lucide-react"
 import { type Process, type ProcessType, computeProgress } from "@/types/onboarding"
 import { ProcessStartDialog } from "./process-start-dialog"
 import { ProcessViewDrawer, statusBadge } from "./process-view-drawer"
-import { useToast } from "@/hooks/use-toast"
 
 const fetcher = (u: string) => fetch(u).then((r) => r.json())
 
@@ -29,7 +28,6 @@ export function ProcessTable() {
     const [type, setType] = useState<"all" | ProcessType>("all")
     const [status, setStatus] = useState<"all" | "in_progress" | "completed" | "overdue">("all")
     const [drawerId, setDrawerId] = useState<string | null>(null)
-    const { toast } = useToast()
 
     const filtered = useMemo(() => {
         const q = query.toLowerCase()

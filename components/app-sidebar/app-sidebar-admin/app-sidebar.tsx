@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import {
     Sidebar as UISidebar,
@@ -13,9 +14,6 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarMenuSub,
-    SidebarMenuSubButton,
-    SidebarMenuSubItem, SidebarProvider,
     SidebarRail,
     SidebarSeparator,
 } from "@/components/ui/sidebar"
@@ -29,52 +27,15 @@ import {
     FileText,      // Master Document, Payslip
     CalendarDays,  // Attendance, Leave
     Briefcase,     // Recruitment
-    DollarSign,    // Payroll Run
     Wallet,        // Payroll / Finance (transfer, reimbursement)
     Receipt,       // Expense Claims
     FileCheck,     // Compliance / Policy
-    BarChart3,     // Reports & Analytics
     ShieldCheck,   // Approvals / Compliance OK
-    Shield,        // Security / Audit Logs
     Settings,      // System Settings
     FileBarChart,
     Megaphone,      // Announcements
-    Cog,            // Settings
     Building, Clock,       // Master Department
 } from "lucide-react";
-
-
-const nav = [
-    { href: "/dashboard", label: "Dashboard", icon: LayoutGrid },
-
-    // Employee
-    { href: "/employees", label: "Employees", icon: Users },
-    { href: "/documents", label: "Documents", icon: FileText },
-    { href: "/onboarding", label: "Onboarding / Offboarding", icon: UserPlus },
-
-    // Attendance & Leave
-    { href: "/attendance", label: "Attendance", icon: CalendarDays },
-    { href: "/leave", label: "Leave Management", icon: CalendarDays },
-
-    // Payroll & Finance
-    { href: "/payroll", label: "Payroll", icon: Wallet },
-    { href: "/reimbursement", label: "Reimbursements", icon: Receipt },
-
-    // Recruitment & Performance
-    { href: "/recruitment", label: "Recruitment", icon: Briefcase },
-    { href: "/performance", label: "Performance & Goals", icon: FileCheck },
-
-    // Compliance & Approvals
-    { href: "/compliance", label: "Compliance", icon: ShieldCheck },
-    { href: "/approvals", label: "Approvals Center", icon: ShieldCheck },
-
-    // Reports
-    { href: "/reports", label: "Analytics", icon: BarChart3 },
-
-    // System & Security
-    { href: "/settings", label: "Settings", icon: Settings },
-    { href: "/security", label: "Security & Audit Logs", icon: Shield },
-];
 
 
 export function AppSidebar() {
@@ -94,17 +55,21 @@ export function AppSidebar() {
                         <SidebarMenuButton asChild isActive={pathname === "/dashboard"}>
                             <Link href="/modules/dashboard" className="flex items-center gap-2">
                                 {/* Logo gede buat expanded */}
-                                <img
+                                <Image
                                     src="/assets/bg.png"
                                     alt="AnglerFish Logo"
-                                    className="w-10 h-10 group-data-[collapsible=icon]:hidden"
+                                    width={40}
+                                    height={40}
+                                    className="group-data-[collapsible=icon]:hidden"
                                 />
 
                                 {/* Logo kecil buat collapsed */}
-                                <img
+                                <Image
                                     src="/assets/bg.png"
                                     alt="AnglerFish Logo"
-                                    className="w-10 h-5 hidden group-data-[collapsible=icon]:block"
+                                    width={40}
+                                    height={20}
+                                    className="hidden group-data-[collapsible=icon]:block"
                                 />
 
                                 {/* Text cuma muncul kalau expanded */}

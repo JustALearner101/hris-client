@@ -28,7 +28,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function AnnouncementTableCard() {
     const { data, isLoading, mutate } = useSWR<{ data: Announcement[] }>("/api/announcement", fetcher)
-    const items = data?.data || []
+    const items = React.useMemo(() => data?.data ?? [], [data?.data])
 
     const [query, setQuery] = React.useState("")
     const [categoryFilter, setCategoryFilter] = React.useState<string>("all")

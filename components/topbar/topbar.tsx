@@ -14,11 +14,6 @@ import {
 import { Bell, Search } from "lucide-react"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 
-// Logout Function
-const logout = async () => {
-    window.location.href = "/login"
-}
-
 export function Topbar() {
     return (
         <header

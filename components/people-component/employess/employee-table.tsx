@@ -26,7 +26,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function EmployeeTableCard() {
     const { data, isLoading, mutate } = useSWR<{ data: Employee[] }>("/api/employees", fetcher)
-    const items = data?.data || []
+    const items = React.useMemo(() => data?.data ?? [], [data?.data])
     const [query, setQuery] = React.useState("")
     const [page, setPage] = React.useState(1)
     const pageSize = 10

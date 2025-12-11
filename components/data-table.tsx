@@ -14,7 +14,7 @@ export type ColumnDef<T> = {
     label: string
     align?: "left" | "center" | "right"
     width?: string
-    render?: (value: any, row: T) => React.ReactNode
+    render?: (value: T[keyof T], row: T) => React.ReactNode
     sortable?: boolean
 }
 
@@ -73,9 +73,9 @@ export function DataTable<T>({
     const sorted = React.useMemo(() => {
         if (!sortKey) return filtered
         const next = [...filtered]
-        next.sort((a: any, b: any) => {
-            const av = a[sortKey as string]
-            const bv = b[sortKey as string]
+        next.sort((a: T, b: T) => {
+            const av = a[sortKey as keyof T]
+            const bv = b[sortKey as keyof T]
             if (av == null && bv == null) return 0
             if (av == null) return sortDir === "asc" ? -1 : 1
             if (bv == null) return sortDir === "asc" ? 1 : -1
@@ -150,12 +150,12 @@ export function DataTable<T>({
                                                 col.align === "right" && "text-right",
                                                 col.width && col.width,
                                             )}
+                                            aria-sort={isSorted ? (sortDir === "asc" ? "ascending" : "descending") : undefined}
                                         >
                                             <button
                                                 type="button"
                                                 className={cn("inline-flex items-center gap-1", col.sortable && "cursor-pointer select-none")}
                                                 onClick={() => handleHeaderClick(col)}
-                                                aria-sort={isSorted ? (sortDir === "asc" ? "ascending" : "descending") : "none"}
                                                 aria-label={`Sort by ${col.label}`}
                                             >
                                                 <span className="text-foreground">{col.label}</span>
@@ -201,7 +201,7 @@ export function DataTable<T>({
                                 pageRows.map((row, i) => (
                                     <TableRow key={`row-${i}`} tabIndex={0}>
                                         {columns.map((col) => {
-                                            const raw = (row as any)[col.key]
+                                            const raw = row[col.key]
                                             return (
                                                 <TableCell
                                                     key={String(col.key)}

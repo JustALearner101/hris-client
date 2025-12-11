@@ -46,7 +46,7 @@ export function AttendanceTable() {
     const [filters, setFilters] = React.useState<AttendanceFilterState>({ status: "all" })
     const [page, setPage] = React.useState(1)
     const [pageSize] = React.useState(10)
-    const [sort, setSort] = React.useState("date:desc")
+    const [sort] = React.useState("date:desc")
     const [auto, setAuto] = React.useState(false)
 
     const query = buildQuery(filters, page, pageSize, sort)
@@ -62,7 +62,7 @@ export function AttendanceTable() {
         return () => clearInterval(id)
     }, [auto, mutate])
 
-    const rows = data?.data || []
+    const rows = React.useMemo(() => data?.data ?? [], [data?.data])
     const departments = React.useMemo(() => Array.from(new Set(rows.map((r) => r.department))).sort(), [rows])
     const shifts = React.useMemo(() => Array.from(new Set(rows.map((r) => r.shift))).sort(), [rows])
 
