@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { listDepartments, createDepartment, getTree, getChildren } from "./data"
+import type { DepartmentSortBy, SortDir } from "@/types/department"
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url)
@@ -28,8 +29,8 @@ export async function GET(req: Request) {
         validAt: searchParams.get("validAt") || undefined,
         page: Number(searchParams.get("page") || "1"),
         pageSize: Number(searchParams.get("pageSize") || "10"),
-        sortBy: (searchParams.get("sortBy") || "name") as any,
-        sortDir: (searchParams.get("sortDir") || "asc") as any,
+        sortBy: (searchParams.get("sortBy") || "name") as DepartmentSortBy,
+        sortDir: (searchParams.get("sortDir") || "asc") as SortDir,
     })
     return NextResponse.json(resp)
 }

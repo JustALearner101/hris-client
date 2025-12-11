@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import {
     Sidebar as UISidebar,
@@ -52,17 +53,21 @@ export function EmployeeSidebar() {
                             <SidebarMenuButton asChild isActive={pathname === "/dashboard"}>
                                 <Link href="/modules/dashboard" className="flex items-center gap-2">
                                     {/* Logo besar ketika expanded */}
-                                    <img
+                                    <Image
                                         src="/assets/bg.png"
                                         alt="AnglerFish Logo"
-                                        className="w-10 h-10 group-data-[collapsible=icon]:hidden"
+                                        width={40}
+                                        height={40}
+                                        className="group-data-[collapsible=icon]:hidden"
                                     />
 
                                     {/* Logo kecil ketika collapsed */}
-                                    <img
+                                    <Image
                                         src="/assets/bg.png"
                                         alt="AnglerFish Logo"
-                                        className="w-10 h-5 hidden group-data-[collapsible=icon]:block"
+                                        width={40}
+                                        height={20}
+                                        className="hidden group-data-[collapsible=icon]:block"
                                     />
 
                                     {/* Text hanya muncul jika expanded */}

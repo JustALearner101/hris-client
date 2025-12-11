@@ -6,13 +6,10 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { getAll as getAllEmployees } from "@/app/api/employees/data";
 import EmployeeTableCard from "@/components/people-component/employess/employee-table";
 import {Separator} from "@/components/ui/separator";
 
 export default function MasterEmployeePage() {
-    const employees = getAllEmployees()
-
     return (
         <main className="mx-auto max-w-[1200px] p-4 md:p-6">
             <section aria-label="Master Employee" className="space-y-4">

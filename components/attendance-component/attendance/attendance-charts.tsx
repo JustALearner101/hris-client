@@ -15,7 +15,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export function AttendanceCharts({ query }: { query: string }) {
     const { data } = useSWR<{ data: { status: string; department: string }[]; meta: Record<string, unknown> }>(`/api/attendance/timesheets?${query}`, fetcher)
-    const rows = data?.data || []
+    const rows = React.useMemo(() => data?.data ?? [], [data?.data])
 
     const presentVsAbsent = React.useMemo(() => {
         let present = 0

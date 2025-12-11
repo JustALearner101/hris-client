@@ -3,6 +3,9 @@ import useSWR from "swr"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import type { Department, DepartmentAuditLog } from "@/types/department"
+
+type PathItem = Pick<Department, 'id' | 'name'>
 
 type Props = { id?: string; open: boolean; onOpenChange: (v: boolean) => void }
 
@@ -33,7 +36,7 @@ export function DepartmentViewDrawer({ id, open, onOpenChange }: Props) {
                     <div className="text-sm text-muted-foreground">
                         Hierarchy:
                         <div className="mt-1 text-foreground">
-                            {path.map((p: any, i: number) => (
+                            {path.map((p: PathItem, i: number) => (
                                 <span key={p.id}>
                   {p.name}
                                     {i < path.length - 1 ? " / " : ""}
@@ -67,7 +70,7 @@ export function DepartmentViewDrawer({ id, open, onOpenChange }: Props) {
                             {d?.audit
                                 ?.slice()
                                 .reverse()
-                                .map((a: any) => (
+                                .map((a: DepartmentAuditLog) => (
                                     <div key={a.id} className="text-sm">
                                         <div className="text-foreground">
                                             {a.action} — {new Date(a.changedAt).toLocaleString()}

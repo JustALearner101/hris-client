@@ -10,7 +10,9 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { useToast } from "@/hooks/use-toast"
-import type { Department } from "@/types/department"
+import type { Department, DepartmentStatus } from "@/types/department"
+
+type EmployeeListResponse = { data: Array<{ id: string; name: string }> } | Array<{ id: string; name: string }>
 
 type Props = {
     trigger?: React.ReactNode
@@ -27,8 +29,8 @@ export function DepartmentFormDialog({ trigger, department, onSaved }: Props) {
 
     const { data: deptOptions } = useSWR<{ data: Department[] }>(open ? "/api/departments?mode=children" : null, fetcher)
 
-    const { data: employeesResp } = useSWR<any>(open ? "/api/employees" : null, fetcher)
-    const employees: Array<{ id: string; name: string }> = employeesResp?.data || employeesResp || []
+    const { data: employeesResp } = useSWR<EmployeeListResponse>(open ? "/api/employees" : null, fetcher)
+    const employees: Array<{ id: string; name: string }> = employeesResp && 'data' in employeesResp ? employeesResp.data : (employeesResp ?? [])
 
     const [form, setForm] = React.useState({
         name: department?.name || "",
@@ -133,7 +135,7 @@ export function DepartmentFormDialog({ trigger, department, onSaved }: Props) {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="grid gap-2">
                             <Label>Status</Label>
-                            <Select value={form.status} onValueChange={(v) => onChange("status", v as any)}>
+                            <Select value={form.status} onValueChange={(v) => onChange("status", v as DepartmentStatus)}>
                                 <SelectTrigger>
                                     <SelectValue />
                                 </SelectTrigger>

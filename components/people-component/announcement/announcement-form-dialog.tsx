@@ -9,14 +9,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
-import { X, ChevronDownIcon } from "lucide-react"
-import { Calendar } from "@/components/ui/calendar";
+import { X } from "lucide-react"
 import type { Announcement, AnnouncementCategory, AnnouncementPriority, DeliveryChannel } from "@/types/announcement"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
 
 interface AnnouncementFormDialogProps {
     open: boolean
@@ -53,7 +47,6 @@ export function AnnouncementFormDialog({ open, onOpenChange, onSubmit, initial, 
     const [date, setDate] = React.useState<Date | undefined>(() =>
         initial?.scheduledAt ? new Date(initial.scheduledAt) : undefined
     )
-    const [popoverOpen, setPopoverOpen] = React.useState(false)
 
     React.useEffect(() => {
         if (open && initial) {

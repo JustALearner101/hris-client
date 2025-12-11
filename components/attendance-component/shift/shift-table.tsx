@@ -24,13 +24,13 @@ export function ShiftTable() {
     const pageSize = 10
 
     const query = useMemo(() => {
-        const u = new URL("/api/shifts", window.location.origin)
-        if (search) u.searchParams.set("search", search)
-        if (type) u.searchParams.set("type", String(type))
-        if (status) u.searchParams.set("active", status)
-        u.searchParams.set("page", String(page))
-        u.searchParams.set("pageSize", String(pageSize))
-        return u.toString()
+        const searchParams = new URLSearchParams()
+        if (search) searchParams.set("search", search)
+        if (type) searchParams.set("type", String(type))
+        if (status) searchParams.set("active", status)
+        searchParams.set("page", String(page))
+        searchParams.set("pageSize", String(pageSize))
+        return `/api/shifts?${searchParams.toString()}`
     }, [search, type, status, page])
 
     const { data, isLoading, mutate } = useSWR<ShiftListResponse>(query, fetcher)
