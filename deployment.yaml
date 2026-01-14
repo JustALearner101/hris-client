@@ -1,0 +1,45 @@
+name: "deployment to server"
+
+on:
+  push:
+    braches:
+      - main
+jobs:
+  build-and-deploy:
+    #
+    runs-on: ubuntu-latest
+
+    steps:
+      #Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        echos: "Checkout in action"
+        uses: actions/checkout@v2
+
+      #Setup Node.js
+      - name: Set up Node.js
+        echos: "Setting up Node.js"
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' #Version of Node.js
+
+      #Install deps
+      - name: Install dependencies
+        echos: "Installing dependencies"
+        run: npm install
+
+      #Build
+      - name: Build project
+        echos: "Building project"
+        run: npm run build
+
+      #Deploy
+      - name: Deploy to server
+        echos: "Deploying to server"
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "build/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: "/var/www/anglerfish.com/"

@@ -104,4 +104,11 @@ COPY . .
 EXPOSE 3000
 
 # Jalankan Next.js dev server (Turbopack sudah diaktifkan oleh script)
-CMD ["pnpm", "dev", "--", "-p", "3000", "--turbo"]
+CMD ["pnpm", "dev"]
+
+# --------------------------------------------
+## Tag the image
+#docker tag hris-client:latest tar01/hris-client:latest
+#
+## Push the image
+#docker push tar01/hris-client:latest

@@ -55,7 +55,6 @@ export function AnnouncementFormDialog({ open, onOpenChange, onSubmit, initial, 
             setSelectedDepartments(initial.audience?.departments || [])
             setDate(initial.scheduledAt ? new Date(initial.scheduledAt) : undefined)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open, initial])
 
     // Sync Calendar -> formData.scheduledAt
@@ -64,7 +63,6 @@ export function AnnouncementFormDialog({ open, onOpenChange, onSubmit, initial, 
         if (formData.scheduledAt !== iso) {
             setFormData((prev) => ({ ...prev, scheduledAt: iso }))
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [date])
 
     // Sync formData.scheduledAt -> Calendar (keeps typing in input and calendar selection consistent)
@@ -77,7 +75,6 @@ export function AnnouncementFormDialog({ open, onOpenChange, onSubmit, initial, 
         } else if (date) {
             setDate(undefined)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formData.scheduledAt])
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -114,7 +111,7 @@ export function AnnouncementFormDialog({ open, onOpenChange, onSubmit, initial, 
         setSelectedChannels((prev) => (prev.includes(channel) ? prev.filter((c) => c !== channel) : [...prev, channel]))
     }
 
-    const addDepartment = () => {
+    const addDepartment  = () => {
         if (departmentInput.trim() && !selectedDepartments.includes(departmentInput.trim())) {
             setSelectedDepartments([...selectedDepartments, departmentInput.trim()])
             setDepartmentInput("")
