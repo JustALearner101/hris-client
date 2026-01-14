@@ -38,6 +38,7 @@ export function AnnouncementFormDialog({ open, onOpenChange, onSubmit, initial, 
         createdBy: "Current User",
         ...initial,
     })
+    
 
     const [selectedChannels, setSelectedChannels] = React.useState<DeliveryChannel[]>(initial?.channels || ["web"])
     const [selectedDepartments, setSelectedDepartments] = React.useState<string[]>(initial?.audience?.departments || [])
