@@ -1,35 +1,35 @@
-name: "deployment to server"
+name: Deploy Angular to VPS
 
 on:
   push:
     branches:
-      - main  # Sudah diperbaiki dari 'braches'
+      - main  # Atau ganti ke nama branch utama lo
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '18' # Sesuaiin sama versi Node lo
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Build project
-        run: npm run build
+      - name: Build Angular
+        run: npm run build -- --configuration production
 
-      - name: Deploy to server
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "build/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: root # GANTI JIKA PERLU
-          TARGET: "/var/www/anglerfish.com/"
+      - name: Deploy to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist/nama-projek-lo/*" # GANTI 'nama-projek-lo' sesuai folder hasil build
+          target: "/var/www/anglerfish.com"
+          strip_components: 2
