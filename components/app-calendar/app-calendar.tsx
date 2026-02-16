@@ -10,6 +10,7 @@ const events = [
     { date: "2024-09-11", title: "Meeting With Client" },
 ]
 
+
 export default function Calendar() {
     const [currentMonth, setCurrentMonth] = React.useState(new Date(2024, 8)) // Sept 2024
 
