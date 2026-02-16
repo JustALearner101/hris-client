@@ -84,9 +84,9 @@ services:
     #   dockerfile: Dockerfile
     environment:
       NODE_ENV: development
-      # DATABASE_URL: 
-      # REDIS_URL: 
-      # KEYCLOAK_*: 
+      # DATABASE_URL:
+      # REDIS_URL:
+      # KEYCLOAK_*:
     ports:
       - "8080:8080"
     depends_on:
